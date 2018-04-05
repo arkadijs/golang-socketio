@@ -2,7 +2,7 @@ package gosocketio
 
 import (
 	"encoding/json"
-	"github.com/graarh/golang-socketio/protocol"
+	"github.com/arkadijs/golang-socketio/protocol"
 	"sync"
 	"reflect"
 )
@@ -99,7 +99,7 @@ func (m *methods) processIncomingMessage(c *Channel, msg *protocol.Message) {
 		}
 
 		data := f.getArgs()
-		err := json.Unmarshal([]byte(msg.Args), &data)
+		err := json.Unmarshal([]byte("["+msg.Args+"]"), &data)
 		if err != nil {
 			return
 		}
@@ -116,7 +116,7 @@ func (m *methods) processIncomingMessage(c *Channel, msg *protocol.Message) {
 		if f.ArgsPresent {
 			//data type should be defined for unmarshall
 			data := f.getArgs()
-			err := json.Unmarshal([]byte(msg.Args), &data)
+			err := json.Unmarshal([]byte("["+msg.Args+"]"), &data)
 			if err != nil {
 				return
 			}
